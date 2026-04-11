@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Buses.Services
 {
-    public class ServicesRoutes
+    public class ServicesRoutes 
     {
 
     }
