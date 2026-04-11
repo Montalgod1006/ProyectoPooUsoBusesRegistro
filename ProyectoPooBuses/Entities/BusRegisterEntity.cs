@@ -13,12 +13,14 @@ namespace ProyectoPooBuses.Entities
         [Column("dni")]
         [Required]
         public string DNI { get; set; }
-        [Column("name")]
+        [Column("first_name")]
         [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
         [Column("last_name")]
         [Required]
         public string LastName { get; set; }
+        [Column("gender")]
+        public string Gender { get; set; }
         public virtual IEnumerable<RouteRegisterEntity> Routes { get; set; }
     }
 }
