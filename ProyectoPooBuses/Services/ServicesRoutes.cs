@@ -7,7 +7,7 @@ using ProyectoPooBuses.Dtos.RoutesUses;
 
 namespace Routes.Services
 {
-    public class ServicesRoutes
+    public class ServicesRoutes 
     {
         private readonly BusUseRegisterDbContext _context;
 
