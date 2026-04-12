@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Net;
 using ProyectoPooBuses.Database;
 using ProyectoPooBuses.Dtos.RoutesUses;
+using ProyectoPooBuses.Mappers;
+using ProyectoPooBuses.Constants;
 
 namespace Routes.Services
 {
@@ -18,14 +20,14 @@ namespace Routes.Services
 
         public async Task<ResponseDto<RoutesUsesActionResponseDto>> CreateAsync(RoutesUsesCreateDto dto)
         {
-            RouteRegisterEntity routeEntity = RoutesMapper.CreateDtoToEntity(dto);
+            RouteRegisterEntity routeEntity = RouteMapper.CreateDtoToEntity(dto);
 
             _context.Routes.Add(routeEntity);
             await _context.SaveChangesAsync();
 
             return new ResponseDto<RoutesUsesActionResponseDto>
             {
-                StatusCode = HttpStatusCode.OK,
+                StatusCode = ProyectoPooBuses.Constants.HttpStatusCode.OK,
                 Message = HttpMessageResponse.REGISTER_CREATED,
                 Status = true,
                 Data = new RoutesUsesActionResponseDto
@@ -43,22 +45,22 @@ namespace Routes.Services
             {
                 return new ResponseDto<RoutesUsesActionResponseDto>
                 {
-                    StatusCode = HttpStatusCode.NOT_FOUND,
+                    StatusCode = ProyectoPooBuses.Constants.HttpStatusCode.NOT_FOUND,
                     Status = false,
                     Message = HttpMessageResponse.REGISTER_NOT_FOUND,
                 };
             }
 
-            RoutesMapper.EditDtoToEntity(routeEntity, dto);
+            RouteMapper.EditDtoToEntity(routeEntity, dto);
 
             await _context.SaveChangesAsync();
 
             return new ResponseDto<RoutesUsesActionResponseDto>
             {
-                StatusCode = HttpStatusCode.OK,
+                StatusCode = ProyectoPooBuses.Constants.HttpStatusCode.OK,
                 Status = true,
                 Message = HttpMessageResponse.REGISTER_UPDATED,
-                Data = new RoutesUsesActionResponse
+                Data = new RoutesUsesActionResponseDto
                 {
                     Id = id
                 }
@@ -73,7 +75,7 @@ namespace Routes.Services
             {
                 return new ResponseDto<RoutesUsesActionResponseDto>
                 {
-                    StatusCode = HttpStatusCode.NOT_FOUND,
+                    StatusCode = ProyectoPooBuses.Constants.HttpStatusCode.NOT_FOUND,
                     Status = false,
                     Message = HttpMessageResponse.REGISTER_NOT_FOUND,
                 };
@@ -84,7 +86,7 @@ namespace Routes.Services
 
             return new ResponseDto<RoutesUsesActionResponseDto>
             {
-                StatusCode = HttpStatusCode.OK,
+                StatusCode = ProyectoPooBuses.Constants.HttpStatusCode.OK,
                 Status = true,
                 Message = HttpMessageResponse.REGISTER_DELETED,
                 Data = new RoutesUsesActionResponseDto

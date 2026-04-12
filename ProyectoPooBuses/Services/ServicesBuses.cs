@@ -1,9 +1,11 @@
 
 using Microsoft.EntityFrameworkCore;
+using ProyectoPooBuses.Constants;
 using ProyectoPooBuses.Database;
 using ProyectoPooBuses.Dtos.Buses;
 using ProyectoPooBuses.Dtos.Common;
 using ProyectoPooBuses.Entities;
+using ProyectoPooBuses.Mappers;
 using SQLitePCL;
 
 namespace Buses.Services
@@ -36,7 +38,7 @@ namespace Buses.Services
                         }
                     };
             }
-        public async Task<ResponseDto<BusesActionResponseDto>> EditAsync (string id, BusCreateDto dto)
+        public async Task<ResponseDto<BusesActionResponseDto>> EditAsync (string id, BusEditDto dto)
         {
             var busEntity = await _context.Buses.FirstOrDefaultAsync(b => b.Id == id);
 
