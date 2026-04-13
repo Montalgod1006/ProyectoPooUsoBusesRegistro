@@ -15,6 +15,20 @@ namespace ProyectoPooBuses.Controllers
             _routeService = routesServices;
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetPage(string searchTerm ="", int page =1, int pageSize = 10)
+        {
+            var response = await _routeService.GetPageAsync(searchTerm, page, pageSize);
+            return StatusCode(response.StatusCode, response);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetOne(string id)
+        {
+            var result = await _routeService.GetOneByIdAsync(id);
+            return StatusCode(result.StatusCode, result);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Create(RoutesUsesCreateDto dto)
         {
