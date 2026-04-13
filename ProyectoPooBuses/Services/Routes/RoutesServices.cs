@@ -1,19 +1,18 @@
 using ProyectoPooBuses.Dtos.Common;
 using ProyectoPooBuses.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
 using ProyectoPooBuses.Database;
 using ProyectoPooBuses.Dtos.RoutesUses;
 using ProyectoPooBuses.Mappers;
 using ProyectoPooBuses.Constants;
 
-namespace Routes.Services
+namespace ProyectoPooBuses.Services.Routes
 {
-    public class ServicesRoutes 
+    public class RoutesServices : IRoutesServices
     {
         private readonly BusUseRegisterDbContext _context;
 
-        public ServicesRoutes(BusUseRegisterDbContext context)
+        public RoutesServices(BusUseRegisterDbContext context)
         {
             _context = context;
         }
@@ -23,6 +22,7 @@ namespace Routes.Services
             RouteRegisterEntity routeEntity = RouteMapper.CreateDtoToEntity(dto);
 
             _context.Routes.Add(routeEntity);
+            
             await _context.SaveChangesAsync();
 
             return new ResponseDto<RoutesUsesActionResponseDto>
@@ -82,6 +82,7 @@ namespace Routes.Services
             }
 
             _context.Routes.Remove(routeEntity);
+
             await _context.SaveChangesAsync();
 
             return new ResponseDto<RoutesUsesActionResponseDto>
