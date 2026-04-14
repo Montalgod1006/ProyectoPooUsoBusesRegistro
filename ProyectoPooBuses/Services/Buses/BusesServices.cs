@@ -179,9 +179,5 @@ namespace ProyectoPooBuses.Services.Buses
             };
         }
 
-        public Task<ResponseDto<BusesActionResponseDto>> EditAsync(string id, BusCreateDto dto)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
