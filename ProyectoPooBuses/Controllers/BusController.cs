@@ -30,9 +30,9 @@ namespace ProyectoPooBuses.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateAsync (BusCreateDto dto)
+        public async Task<ActionResult> Create (BusCreateDto dto)
         {
-            var result = await _busService.CreateAsync(dto);
+            var result = await _busService.Create(dto);
             return StatusCode(result.StatusCode, result);
         }
 
