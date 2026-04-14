@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ProyectoPooBuses.Database;
 using ProyectoPooBuses.Services.Buses;
 using ProyectoPooBuses.Services.Routes;
+using ProyectoPooBuses.Services.Statistics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddTransient<IBusesServices, BusesServices>();
 builder.Services.AddTransient<IRoutesServices, RoutesServices>();
+builder.Services.AddTransient<IDailyStatistics, DailyStatisticsServices>();
+
 
 
 builder.Services.AddDbContext<BusUseRegisterDbContext>(
