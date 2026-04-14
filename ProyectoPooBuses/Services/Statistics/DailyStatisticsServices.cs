@@ -136,7 +136,8 @@ namespace ProyectoPooBuses.Services.Statistics
                 Where(x => x.Id == mostUsedRouteID).Select(x => x.RouteNumber).
                 FirstOrDefaultAsync();
                 TotalDailyStatisticsEntity statisticEntity = DailiesStatisticsMapper.CreateDtoToEntity(dto);
-
+                
+                _context.Dailies.Add(statisticEntity);
                 await _context.SaveChangesAsync();
 
                 return new ResponseDto<DailiesStatisticsActionResponseDto>
@@ -161,10 +162,10 @@ namespace ProyectoPooBuses.Services.Statistics
             }
         }
 
-        public async Task<ResponseDto<DailiesStatisticsActionResponseDto>> EditAsync(string id, DailiesStatisticsEditDto dto)
+        public async Task<ResponseDto<DailiesStatisticsActionResponseDto>> EditAsync(string id)
         {
             var statisticsEntity = await _context.Dailies.FirstOrDefaultAsync(b => b.Id == id);
-
+            
             if (statisticsEntity is null)
             {
                 return new ResponseDto<DailiesStatisticsActionResponseDto>
@@ -174,7 +175,8 @@ namespace ProyectoPooBuses.Services.Statistics
                     Message = HttpMessageResponse.REGISTER_NOT_FOUND,
                 };
             }
-                dto.Date = await _context.Dailies
+            var dto = new DailiesStatisticsEditDto();
+            dto.Date = await _context.Dailies
                 .OrderBy(x => x.Id).
                 Select(x => x.Date).FirstOrDefaultAsync(); 
 
