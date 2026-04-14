@@ -31,11 +31,11 @@ namespace ProyectoPooBuses.Services.Buses
 
             int startIndex = (page - 1) * pageSize;
 
-            IQueryable<BusRegisterEntity> busesQuery = _context.Buses.Include(p => p.Routes);
+            IQueryable<BusRegisterEntity> busesQuery = _context.Buses;
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                busesQuery = busesQuery.Where(x => (x.RouteNumber + " " + x.BusModel).Contains(searchTerm)); // Aquí se podría agregar todos los demás campos a la búsqueda
+                busesQuery = busesQuery.Where(x => (x.RouteNumber + " " + x.BusModel).Contains(searchTerm)); 
             }
 
             int totalRows = await busesQuery.CountAsync();
@@ -119,7 +119,7 @@ namespace ProyectoPooBuses.Services.Buses
             };
         }
 
-        public async Task<ResponseDto<BusesActionResponseDto>> EditAsync (string id, BusEditDto dto)
+        public async Task<ResponseDto<BusesActionResponseDto>> EditAsync(string id, BusEditDto dto)
         {
             var busEntity = await _context.Buses.FirstOrDefaultAsync(b => b.Id == id);
 
@@ -177,11 +177,6 @@ namespace ProyectoPooBuses.Services.Buses
                     Id = id
                 }
             };
-        }
-
-        public Task<ResponseDto<BusesActionResponseDto>> EditAsync(string id, BusCreateDto dto)
-        {
-            throw new NotImplementedException();
         }
     }
 }

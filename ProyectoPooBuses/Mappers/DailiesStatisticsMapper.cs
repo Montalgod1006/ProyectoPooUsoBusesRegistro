@@ -5,6 +5,7 @@ namespace ProyectoPooBuses.Mappers
 {
     public static class DailiesStatisticsMapper
     {
+        
         public static TotalDailyStatisticsEntity CreateDtoToEntity(DailiesStatisticsCreateDto dto)
         {
             return new TotalDailyStatisticsEntity
@@ -20,13 +21,26 @@ namespace ProyectoPooBuses.Mappers
 
         public static TotalDailyStatisticsEntity EditDtoToEntity(TotalDailyStatisticsEntity entity, DailiesStatisticsCreateDto dto)
         {
-            entity.Date = dto.Date;
             entity.TotalPassengersDay = dto.TotalPassengersDay;
             entity.RushHour = dto.RushHour;
             entity.OffPeakHour = dto.OffPeakHour;
             entity.MostUsedRoute = dto.MostUsedRoute;
 
             return entity;
+        }
+
+         public static List<DailiesStatisticsDto> ListEntityToListDto(List<TotalDailyStatisticsEntity> entities)
+        {
+            return entities.Select(statistic => new DailiesStatisticsDto
+            {
+                Id = statistic.Id,
+                Date = statistic.Date,
+                TotalPassengersDay = statistic.TotalPassengersDay,
+                RushHour = statistic.RushHour,
+                OffPeakHour = statistic.OffPeakHour,
+                MostUsedRoute = statistic.MostUsedRoute
+                
+            }).ToList();
         }
     }
 }
