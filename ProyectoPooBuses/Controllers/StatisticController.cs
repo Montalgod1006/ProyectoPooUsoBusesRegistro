@@ -37,9 +37,10 @@ namespace ProyectoPooBuses.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(string id, DailiesStatisticsEditDto dto)
+        public async Task<ActionResult> Update(string id)
         {
-            var result = await _statisticService.EditAsync(id, dto);
+            
+            var result = await _statisticService.EditAsync(id);
             return StatusCode(result.StatusCode, result);
         }
 
